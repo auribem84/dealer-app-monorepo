@@ -28,4 +28,4 @@ provider "render" {
 # Solo si vas a automatizar comandos de Slack desde aquí
 #provider "slack" {
 #  configuration_token = var.slack_conf_token
-}
+#}
