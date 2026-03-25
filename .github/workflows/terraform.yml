@@ -1,0 +1,42 @@
+name: "Terraform Infrastructure"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'terraform/**' # Solo se activa si cambias la infraestructura
+  pull_request:
+    paths:
+      - 'terraform/**'
+
+jobs:
+  terraform:
+    name: "Terraform Apply"
+    runs-on: ubuntu-latest
+    
+    # YA NO necesitas la sección env: con las llaves de Render aquí
+    # porque Terraform Cloud las maneja internamente.
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          # SOLO necesitas este token para autenticarte
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./terraform
+
+      - name: Terraform Plan
+        run: terraform plan -input=false
+        working-directory: ./terraform
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
+        working-directory: ./terraform  
