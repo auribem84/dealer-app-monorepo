@@ -13,10 +13,6 @@ terraform {
       source  = "render-oss/render"
       version = "~> 1.0"
     }
-    slack = {
-      source  = "hermosell/slack"
-      version = "~> 1.0"
-    }
   }
 }
 
@@ -24,8 +20,3 @@ provider "render" {
   api_key  = var.render_api_key
   owner_id = var.render_owner_id
 }
-
-# Solo si vas a automatizar comandos de Slack desde aquí
-#provider "slack" {
-#  configuration_token = var.slack_conf_token
-#}
