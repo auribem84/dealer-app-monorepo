@@ -14,4 +14,3 @@ variable "repo_url" {
   type        = string
   default     = "https://github.com/auribem84/dealer-app-monorepo"
 }
-}
