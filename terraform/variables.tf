@@ -1,12 +1,12 @@
 # No necesitas asignarles un 'default' aquí, 
 # Terraform Cloud las llenará por ti al ejecutar el plan.
 
-variable "render_api_key" {
+variable "RENDER_API_KEY" {
   type      = string
   sensitive = true
 }
 
-variable "render_owner_id" {
+variable "RENDER_OWNER_ID" {
   type      = string
 }
 
