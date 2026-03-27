@@ -5,7 +5,6 @@ resource "render_postgres" "db_backend" {
   region   = "oregon"
   version  = "15"
 
-  user          = "admin_user"
   database_name = "app_db"
 }
 
