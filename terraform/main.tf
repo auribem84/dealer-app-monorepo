@@ -56,7 +56,3 @@ variable "db_host" {
   type    = string
   default = "sre-postgres-db.render.com" # Replace with your Render DB host
 }
-
-variable "repo_url" {
-  type = string
-}
