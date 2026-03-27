@@ -3,14 +3,15 @@ resource "render_web_service" "backend_api" {
   plan   = "free"
   region = "oregon"
 
-  runtime_source = {
-    type          = "native"                    # must be "native"
-    repo          = var.repo_url
-    branch        = "main"
-    runtime       = "python"
-    build_command = "pip install -r requirements.txt"
-    start_command = "uvicorn main:app --host 0.0.0.0 --port $PORT"
-    auto_deploy   = true
+  runtime_source {
+    native_runtime {
+      repo          = var.repo_url
+      branch        = "main"
+      runtime       = "python"
+      build_command = "pip install -r requirements.txt"
+      start_command = "uvicorn main:app --host 0.0.0.0 --port $PORT"
+      auto_deploy   = true
+    }
   }
 
   env_vars = {
@@ -18,4 +19,8 @@ resource "render_web_service" "backend_api" {
       value = "production"
     }
   }
+}
+
+variable "repo_url" {
+  type = string
 }
