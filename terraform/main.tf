@@ -20,7 +20,3 @@ resource "render_web_service" "backend_api" {
     }
   }
 }
-
-variable "repo_url" {
-  type = string
-}
