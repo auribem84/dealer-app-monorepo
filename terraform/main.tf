@@ -1,4 +1,3 @@
-
 # 2. SERVICIO WEB (BACKEND)
 resource "render_web_service" "backend_api" {
   name   = "sre-backend-service"
@@ -15,3 +14,4 @@ resource "render_web_service" "backend_api" {
       runtime       = "python"
     }
   }
+}
