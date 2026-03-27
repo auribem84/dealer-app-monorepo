@@ -1,12 +1,3 @@
-# 1. BASE DE DATOS POSTGRESQL
-resource "render_postgres" "db_backend" {
-  name          = "sre-postgres-db"
-  plan          = "free"
-  region        = "oregon"
-  version       = "15"
-  database_name = var.db_name       # Now uses variable
-  password      = var.db_password   # Must define a password
-}
 
 # 2. SERVICIO WEB (BACKEND)
 resource "render_web_service" "backend_api" {
@@ -24,35 +15,3 @@ resource "render_web_service" "backend_api" {
       runtime       = "python"
     }
   }
-
-  env_vars = {
-    "DATABASE_URL" = {
-      value = "postgresql://${var.db_username}:${var.db_password}@${var.db_host}/${var.db_name}"
-    }
-    "NODE_ENV" = {
-      value = "production"
-    }
-  }
-}
-
-# 3. VARIABLES
-variable "db_name" {
-  type    = string
-  default = "app_db"
-}
-
-variable "db_username" {
-  type    = string
-  default = "postgres"   # Render default user
-}
-
-variable "db_password" {
-  type      = string
-  sensitive = true
-  default   = "supersecretpassword" # Replace with your password or use TF Cloud secret
-}
-
-variable "db_host" {
-  type    = string
-  default = "sre-postgres-db.render.com" # Replace with your Render DB host
-}
